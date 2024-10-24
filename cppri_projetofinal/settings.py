@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-INSTALLED_APPS +=['home', ]
+INSTALLED_APPS +=['home','abrigo', ]
+#INSTALLED_APPS +=['home','fornecedores', 'clientes', 'funcionarios', 'produtos']
 INSTALLED_APPS +=['django_bootstrap5', ]
 
 MIDDLEWARE = [
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'cppri_projetofinal.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

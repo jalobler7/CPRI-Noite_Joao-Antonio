@@ -13,5 +13,5 @@ class VoluntarioModelForm(forms.ModelForm):
             'cpf': {'required': 'O CPF do Voluntário é um campo obrigatório', 'unique': 'CPF já cadastrado'},
             'email': {'required': 'O email é um campo obrigatório'},
             'endereco': {'required': 'O endereço é um campo obrigatório'},
-            'quantidade': {'required': 'A quantidade é um campo obrigatório'},
+            #'quantidade': {'required': 'A quantidade é um campo obrigatório'},
         }

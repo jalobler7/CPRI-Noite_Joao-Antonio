@@ -6,7 +6,7 @@ class Voluntario(models.Model):
     cpf = models.CharField('CPF', max_length=11, help_text='CPF do voluntário', unique=True)
     email = models.EmailField('Email', help_text='Email do voluntário')
     endereco = models.CharField('Endereço', max_length=200, help_text='Endereço do voluntário')
-    quantidade = models.IntegerField('Quantidade', help_text='Quantidade associada ao voluntário')
+  #  quantidade = models.IntegerField('Quantidade', help_text='Quantidade associada ao voluntário')
 
     class Meta:
         verbose_name = 'Voluntário'

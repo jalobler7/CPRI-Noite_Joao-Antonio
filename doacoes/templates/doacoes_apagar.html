@@ -5,9 +5,10 @@
         <div class="card-body">
             <div class="row">
                 <h3 class="text-center">Dados da Doação</h3>
-                <p class="p-2 mt-2"><strong>Quantidade: </strong>{{ object.quantidade }}</p>
-                <p class="p-2 mt-2"><strong>Unidade: </strong>{{ object.unidade }}</p>
-                <p class="p-2 mt-2"><strong>Tipo: </strong>{{ object.tipo }}</p>
+                <p class="p-2 mt-2"><strong>Data da Doação: </strong>{{ object.data_doacao }}</p>
+                <p class="p-2 mt-2"><strong>Valor: </strong>{{ object.valor }}</p>
+                <p class="p-2 mt-2"><strong>Tipo de Doação: </strong>{{ object.tipo_doacao }}</p>
+                <p class="p-2 mt-2"><strong>Status: </strong>{{ object.get_status_display }}</p>
                 <p class="p-2 mt-2">Confirma a exclusão da doação: <strong>{{ object }}</strong>?</p>
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}

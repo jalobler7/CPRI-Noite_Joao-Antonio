@@ -7,13 +7,18 @@ class DoacaoModelForm(forms.ModelForm):
         fields = '__all__'
 
         error_messages = {
-            'quantidade': {
-                'required': 'A quantidade da doação é um campo obrigatório'
+
+            'data_doacao': {
+                'required': 'A data da doação é um campo obrigatório'
             },
-            'unidade': {
-                'required': 'A unidade de medida é um campo obrigatório'
+            'valor': {
+                'required': 'O valor da doação é um campo obrigatório',
+                'invalid': 'Por favor, insira um valor válido'
             },
-            'tipo': {
+            'tipo_doacao': {
                 'required': 'O tipo de doação é um campo obrigatório'
+            },
+            'status': {
+                'required': 'O status da doação é um campo obrigatório'
             },
         }

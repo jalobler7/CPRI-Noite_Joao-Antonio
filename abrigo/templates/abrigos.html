@@ -29,6 +29,7 @@
                                 <th>Nome</th>
                                 <th>CNPJ</th>
                                 <th>Endereço</th>
+                                <th>Quantidade de voluntarios</th>
                                 <th style="width: 100px; text-align: center">Ações</th>
                             </thead>
                             <tbody>
@@ -37,6 +38,7 @@
                                             <td> {{ abrigo.nome }} </td>
                                             <td> {{ abrigo.cnpj }} </td>
                                             <td> {{ abrigo.endereco }} </td>
+                                            <td> {{ abrigo.qtd_voluntarios }} </td>
 
                                         <td style="text-align: center">
                                             <a href="{% url 'abrigo_editar' abrigo.pk %}">

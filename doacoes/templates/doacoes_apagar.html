@@ -9,6 +9,7 @@
                 <p class="p-2 mt-2"><strong>Valor: </strong>{{ object.valor }}</p>
                 <p class="p-2 mt-2"><strong>Tipo de Doação: </strong>{{ object.tipo_doacao }}</p>
                 <p class="p-2 mt-2"><strong>Status: </strong>{{ object.get_status_display }}</p>
+                <p class="p-2 mt-2"><strong>Abrigo: </strong>{{ object.abrigo }}</p>
                 <p class="p-2 mt-2">Confirma a exclusão da doação: <strong>{{ object }}</strong>?</p>
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}

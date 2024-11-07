@@ -30,6 +30,7 @@
                             <th>Valor</th>
                             <th>Tipo de Doação</th>
                             <th>Status</th>
+                            <th>Abrigo</th>
                             <th style="width: 100px; text-align: center">Ações</th>
                         </thead>
                         <tbody>
@@ -39,6 +40,7 @@
                                     <td>{{ doacao.valor }}</td>
                                     <td>{{ doacao.get_tipo_doacao_display }}</td>
                                     <td>{{ doacao.get_status_display }}</td>
+                                    <td>{{ doacao.abrigo }}</td>
                                     <td style="text-align: center">
                                         <a href="{% url 'doacoes_editar' doacao.pk %}">
                                             <span class="icon">

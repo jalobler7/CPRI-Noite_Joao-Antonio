@@ -15,15 +15,3 @@ class AbrigoModelForm(forms.ModelForm):
             'endereco' : {'required': 'O endereco é um campo obrigatório'},
         }
 
-
-#ProdutosServicoInLine = inlineformset_factory(Servico, ProdutosServico, fk_name= 'servico',
- #fields=('produto','quantidade'),extra=1, can_delete=True)
-
-# VoluntarioAbrigoInLine = inlineformset_factory(
-#     Abrigo,
-#     VoluntariosAbrigo,
-#     fk_name='abrigo',  # Definindo a chave estrangeira para Abrigo
-#     fields=('voluntario', 'quantidade'),  # Campos a serem exibidos no formset
-#     extra=1,
-#     can_delete=True
-# )

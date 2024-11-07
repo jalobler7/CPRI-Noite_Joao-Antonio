@@ -17,12 +17,3 @@ class VoluntarioModelForm(forms.ModelForm):
 
         }
 
-
-    # VoluntariosAbrigoInLine = inlineformset_factory(
-    #     Voluntario,  #
-    #     VoluntariosAbrigo,  #
-    #     fk_name='voluntario',
-    #     fields=('abrigo'),
-    #     extra=1,
-    #     can_delete=True
-    # )

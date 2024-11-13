@@ -7,7 +7,7 @@ from .models import Abrigo
 class AbrigoModelForm(forms.ModelForm):
     class Meta:
         model = Abrigo
-        fields = '__all__'
+        fields = ['nome','cnpj','endereco']
 
         error_messages = {
             'nome': {'required': 'O endereco é um campo obrigatório'},

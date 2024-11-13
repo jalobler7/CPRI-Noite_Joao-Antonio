@@ -4,7 +4,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
 from django.db.models import Count
 from django.forms import inlineformset_factory
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -15,26 +15,45 @@ from voluntarios.models import Voluntario
 from .forms import AbrigoModelForm
 from .models import Abrigo
 
+# class AbrigosView(ListView):
+#     model = Abrigo
+#     template_name = 'abrigos.html'
+#
+#     # def get_queryset(self):
+#     #     buscar = self.request.GET.get('buscar')
+#     #     qs = super(AbrigosView, self).get_queryset()
+#     #
+#     #
+#     #     if buscar:
+#     #         return qs.filter(endereco__icontains=buscar)
+#     #
+#     #     if qs.count() > 0:
+#     #         paginator = Paginator(qs, 5)
+#     #         listagem = paginator.get_page(self.request.GET.get('page'))
+#     #
+#     #         return listagem
+#     #     else:
+#     #         messages.info(self.request, 'Não existem abrigos cadastrados')
+#     #         return qs
+
+
 class AbrigosView(ListView):
     model = Abrigo
     template_name = 'abrigos.html'
+    context_object_name = 'abrigos'
+    paginate_by = 5
 
     def get_queryset(self):
         buscar = self.request.GET.get('buscar')
-        qs = super(AbrigosView, self).get_queryset()
+
+
+        qs = Abrigo.objects.annotate(qtd_voluntarios=Count('voluntario'))
 
 
         if buscar:
-            return qs.filter(endereco__icontains=buscar)
+            qs = qs.filter(endereco__icontains=buscar)
 
-        if qs.count() > 0:
-            paginator = Paginator(qs, 1)
-            listagem = paginator.get_page(self.request.GET.get('page'))
-            return listagem
-        else:
-            messages.info(self.request, 'Não existem abrigos cadastrados')
-            return qs
-
+        return qs
 
 
 class AbrigoAddView(SuccessMessageMixin, CreateView):
@@ -58,5 +77,6 @@ class AbrigoDeleteView(SuccessMessageMixin, DeleteView):
     template_name = 'abrigo_apagar.html'
     success_url = reverse_lazy('abrigos')
     success_message = 'Abrigo deletado com sucesso'
+
 
 

@@ -24,7 +24,7 @@ class VoluntariosView(ListView):
             return qs.filter(nome__icontains=buscar)
 
         if qs.count() > 0:
-            paginator = Paginator(qs, 1)
+            paginator = Paginator(qs, 5)
             listagem = paginator.get_page(self.request.GET.get('page'))
             return listagem
         else:

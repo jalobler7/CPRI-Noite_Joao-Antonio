@@ -9,7 +9,7 @@ class Voluntario(models.Model):
     endereco = models.CharField('Endereço', max_length=200, help_text='Endereço do voluntário')
 
     abrigo = models.ForeignKey('abrigo.Abrigo', verbose_name=' Abrigo', help_text='Nome do abrigo',
-                               on_delete=models.CASCADE, related_name='abrigo')
+                               on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Voluntário'

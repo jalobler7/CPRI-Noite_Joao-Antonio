@@ -137,10 +137,6 @@ EMAIL_HOST_USER = 'jalobler0107@gmail.com'
 EMAIL_HOST_PASSWORD= 'snzzbqqperuxnfkq'
 DEFAULT_FROM_EMAIL = 'ControleAbrigos'
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'jalobler0107@gmail.com'
-# EMAIL_HOST_PASSWORD= 'aztkfhtssgxxhamn'
-# DEFAULT_FROM_EMAIL = 'Lavacar'
+LOGIN_REDIRECT_URL = 'index'
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'login'

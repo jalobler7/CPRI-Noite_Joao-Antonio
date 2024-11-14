@@ -15,26 +15,7 @@ from voluntarios.models import Voluntario
 from .forms import AbrigoModelForm
 from .models import Abrigo
 
-# class AbrigosView(ListView):
-#     model = Abrigo
-#     template_name = 'abrigos.html'
-#
-#     # def get_queryset(self):
-#     #     buscar = self.request.GET.get('buscar')
-#     #     qs = super(AbrigosView, self).get_queryset()
-#     #
-#     #
-#     #     if buscar:
-#     #         return qs.filter(endereco__icontains=buscar)
-#     #
-#     #     if qs.count() > 0:
-#     #         paginator = Paginator(qs, 5)
-#     #         listagem = paginator.get_page(self.request.GET.get('page'))
-#     #
-#     #         return listagem
-#     #     else:
-#     #         messages.info(self.request, 'Não existem abrigos cadastrados')
-#     #         return qs
+
 
 
 class AbrigosView(ListView):

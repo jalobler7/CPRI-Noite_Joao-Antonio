@@ -1,0 +1,8 @@
+Olá, {{ voluntario.nome }}!
+
+Estamos enviando este e-mail para comunicar que você foi alocado no seguinte abrigo:
+
+**Dados do Abrigo**
+Nome do Abrigo: {{ abrigo.nome }}
+Endereço: {{ abrigo.endereco }}
+CNPJ do abrigo: {{abrigo.cnpj}}

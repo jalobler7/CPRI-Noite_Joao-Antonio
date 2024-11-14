@@ -54,6 +54,12 @@
                                                     <i class="far fa-trash-alt"></i> Apagar
                                                 </span>
                                             </a>
+
+                                            <a href="{% url 'voluntario_exibir' voluntario.pk %}">
+                                                    <span class="icon">
+                                                        <i class="fas fa-check-circle"></i> Visualizar
+                                                    </span>
+                                            </a>
                                         </td>
                                     </tr>
                                 {% endfor %}

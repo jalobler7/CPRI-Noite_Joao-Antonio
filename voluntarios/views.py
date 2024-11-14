@@ -1,16 +1,58 @@
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.mail import send_mail
+
 from django.core.paginator import Paginator
-from django.forms import inlineformset_factory
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect, get_object_or_404
+from django.template.loader import render_to_string
+
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.contrib import messages
-from django.views.generic.base import TemplateResponseMixin
-from django.views import View
 
 
 from .forms import VoluntarioModelForm
 from .models import Voluntario
+
+
+class VoluntarioExibir(DetailView):
+    model = Voluntario
+    template_name = 'voluntario_exibir.html'
+
+
+    def get_object(self, queryset=None):
+
+        voluntario = get_object_or_404(Voluntario, pk=self.kwargs.get('pk'))
+
+
+        self.enviar_email(voluntario)
+        messages.success(self.request, "E-mail de confirmação enviado com sucesso!")
+
+        return voluntario
+
+    def enviar_email(self, voluntario):
+
+        email = []
+        email.append(voluntario.email)
+        dados = {
+            'voluntario': voluntario,
+            'abrigo': voluntario.abrigo
+        }
+
+        texto_email = render_to_string('emails/texto_email.txt', dados)
+        html_email = render_to_string('emails/texto_email.html', dados)
+
+        send_mail(
+            subject='Confirmação de Alocação no Abrigo',
+            message=texto_email,
+            from_email='jalobler0107@gmail.com',
+            recipient_list=email,
+            html_message=html_email,
+            fail_silently=False,
+        )
+
+        #messages.success(self.request, message="E-mail enviado para o voluntário!")
+
+
 
 class VoluntariosView(ListView):
     model = Voluntario
@@ -30,6 +72,28 @@ class VoluntariosView(ListView):
         else:
             messages.info(self.request, 'Não existem voluntários cadastrados')
             return qs
+        #self.enviar_email(voluntarios,abrigo)
+
+# def enviar_email(self, voluntarios):
+    #     email = [voluntarios.email]
+    #     dados = {
+    #         'voluntario': voluntarios,
+    #         'abrigo': voluntarios.abrigo,
+    #     }
+    #
+    #     texto_email = render_to_string('emails/texto_email.txt', dados)
+    #     html_email = render_to_string('emails/texto_email.html', dados)
+    #     send_mail(
+    #         subject='Lavacar-Serviço Concluído',
+    #         message=texto_email,
+    #         from_email='jalobler0107@gmail.com',
+    #         recipient_list=email,
+    #         html_message=html_email,
+    #         fail_silently=False,
+    #     )
+    #
+    #     return redirect('voluntarios')
+
 
 
 class VoluntarioAddView(SuccessMessageMixin, CreateView):
@@ -38,6 +102,7 @@ class VoluntarioAddView(SuccessMessageMixin, CreateView):
     template_name = 'voluntario_form.html'
     success_url = reverse_lazy('voluntarios')
     success_message = 'Voluntário cadastrado com sucesso'
+
 
 
 class VoluntarioUpdateView(SuccessMessageMixin, UpdateView):

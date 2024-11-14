@@ -1,0 +1,31 @@
+{% extends 'inicial.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="card shadow m-3 col-md-6 mx-auto">
+    <div class="card-body">
+        <div class="row">
+            <h3 class="text-center">Dados do Voluntário</h3>
+
+            <p class="p-2 mt-2"><strong>Nome:</strong> {{ voluntario.nome }}</p>
+            <p class="p-2 mt-2"><strong>Idade:</strong> {{ voluntario.idade }}</p>
+            <p class="p-2 mt-2"><strong>CPF:</strong> {{ voluntario.cpf }}</p>
+            <p class="p-2 mt-2"><strong>E-mail:</strong> {{ voluntario.email }}</p>
+            <p class="p-2 mt-2"><strong>Endereço:</strong> {{ voluntario.endereco }}</p>
+
+            <h4 class="mt-4">Abrigo</h4>
+
+            <p class="p-2 mt-2"><strong>Nome do Abrigo:</strong> {{ voluntario.abrigo.nome }}</p>
+            <p class="p-2 mt-2"><strong>Endereço do Abrigo:</strong> {{ voluntario.abrigo.endereco }}</p>
+            <p class="p-2 mt-2"><strong>CNPJ do Abrigo:</strong> {{ voluntario.abrigo.cnpj }}</p>
+
+
+            <div class="text-end mt-4">
+                <a href="{% url 'voluntarios' %}" class="btn btn-primary text-white" type="button">
+                    <span class="text">Voltar</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

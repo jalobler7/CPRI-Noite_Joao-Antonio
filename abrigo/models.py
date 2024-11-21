@@ -11,6 +11,12 @@ class Abrigo(models.Model):
     voluntarios = models.ForeignKey('voluntarios.Voluntario', verbose_name='Voluntario', related_name="tste",
                                      on_delete=models.CASCADE, null=True,blank=True)
 
+
+
+
+
+
+
     class Meta:
         verbose_name = 'Abrigo'
         verbose_name_plural = 'Abrigos'

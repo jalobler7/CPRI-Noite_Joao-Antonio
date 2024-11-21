@@ -25,8 +25,6 @@ class VoluntarioExibir(DetailView):
 
 
         self.enviar_email(voluntario)
-        messages.success(self.request, "E-mail de confirmação enviado com sucesso!")
-
         return voluntario
 
     def enviar_email(self, voluntario):
@@ -50,7 +48,6 @@ class VoluntarioExibir(DetailView):
             fail_silently=False,
         )
 
-        #messages.success(self.request, message="E-mail enviado para o voluntário!")
 
 
 
@@ -72,27 +69,7 @@ class VoluntariosView(ListView):
         else:
             messages.info(self.request, 'Não existem voluntários cadastrados')
             return qs
-        #self.enviar_email(voluntarios,abrigo)
 
-# def enviar_email(self, voluntarios):
-    #     email = [voluntarios.email]
-    #     dados = {
-    #         'voluntario': voluntarios,
-    #         'abrigo': voluntarios.abrigo,
-    #     }
-    #
-    #     texto_email = render_to_string('emails/texto_email.txt', dados)
-    #     html_email = render_to_string('emails/texto_email.html', dados)
-    #     send_mail(
-    #         subject='Lavacar-Serviço Concluído',
-    #         message=texto_email,
-    #         from_email='jalobler0107@gmail.com',
-    #         recipient_list=email,
-    #         html_message=html_email,
-    #         fail_silently=False,
-    #     )
-    #
-    #     return redirect('voluntarios')
 
 
 

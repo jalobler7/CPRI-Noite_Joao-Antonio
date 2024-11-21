@@ -20,8 +20,9 @@ class Doacao(models.Model):
     tipo_doacao = models.CharField('Tipo de Doação', max_length=20, choices=TIPO_DOACAO_CHOICES, help_text='Tipo de doação')
     status = models.CharField('Status', max_length=20, choices=STATUS_DOACAO_CHOICES, help_text='Status da doação')
 
-    abrigo = models.ForeignKey('abrigo.Abrigo', verbose_name='Abrigo', help_text='Nome do abrigo',
-                               on_delete=models.CASCADE)
+
+    abrigo = models.ForeignKey('abrigo.Abrigo', verbose_name=' Abrigo', help_text='Nome do abrigo',
+                               on_delete=models.CASCADE, related_name='doacoes_relacionadas')
 
     class Meta:
         verbose_name = 'Doação'

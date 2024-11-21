@@ -1,0 +1,39 @@
+{% extends 'inicial.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="card shadow m-3 col-md-6 mx-auto">
+    <div class="card-body">
+        <div class="row">
+            <h3 class="text-center">Dados do Abrigo</h3>
+
+            <p class="p-2 mt-2"><strong>Nome:</strong> {{ object.nome }}</p>
+            <p class="p-2 mt-2"><strong>CNPJ:</strong> {{ object.cnpj }}</p>
+            <p class="p-2 mt-2"><strong>Endereço:</strong> {{ object.endereco }}</p>
+
+            <h4 class="mt-4">Doações Relacionadas</h4>
+
+            {% if doacoes %}
+                <ul class="list-group">
+                    {% for doacao in doacoes %}
+                        <li class="list-group-item">
+                            <strong>Data:</strong> {{ doacao.data_doacao }} |
+                            <strong>Valor:</strong> R$ {{ doacao.valor }} |
+                            <strong>Tipo:</strong> {{ doacao.get_tipo_doacao_display }} |
+                            <strong>Status:</strong> {{ doacao.get_status_display }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="p-2 mt-2">Nenhuma doação cadastrada para este abrigo.</p>
+            {% endif %}
+
+            <div class="text-end mt-4">
+                <a href="{% url 'abrigos' %}" class="btn btn-primary text-white" type="button">
+                    <span class="text">Voltar</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

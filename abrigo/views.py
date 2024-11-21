@@ -7,15 +7,31 @@ from django.forms import inlineformset_factory
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.contrib import messages
 from django.views.generic.base import TemplateResponseMixin
 
+from doacoes.models import Doacao
 from voluntarios.models import Voluntario
 from .forms import AbrigoModelForm
 from .models import Abrigo
+#from .forms import ServicoModelForm, ProdutosServicoInLine
+from .forms import AbrigoModelForm
 
 
+class AbrigoExibir(DetailView):
+    model = Abrigo
+    template_name = 'abrigo_exibir.html'
+
+    def get_object(self, queryset=None):
+
+        return get_object_or_404(Abrigo, pk=self.kwargs.get('pk'))
+
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+        context['doacoes'] = self.object.doacoes_relacionadas.all()
+        return context
 
 
 class AbrigosView(ListView):

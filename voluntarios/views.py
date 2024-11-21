@@ -2,7 +2,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
 
 from django.core.paginator import Paginator
-from django.shortcuts import redirect, get_object_or_404
+from django.db.models import Q
+from django.shortcuts import get_object_or_404
 from django.template.loader import render_to_string
 
 from django.urls import reverse_lazy
@@ -54,18 +55,21 @@ class VoluntarioExibir(DetailView):
 class VoluntariosView(ListView):
     model = Voluntario
     template_name = 'voluntarios.html'
+    paginate_by = 5
+
 
     def get_queryset(self):
         buscar = self.request.GET.get('buscar')
         qs = super(VoluntariosView, self).get_queryset()
 
         if buscar:
-            return qs.filter(nome__icontains=buscar)
+            return qs.filter(Q(nome__icontains=buscar) | Q(cpf__icontains=buscar))
+           # return qs.filter(nome__icontains=buscar)
 
-        if qs.count() > 0:
-            paginator = Paginator(qs, 5)
-            listagem = paginator.get_page(self.request.GET.get('page'))
-            return listagem
+        # if qs.count() > 0:
+        #     paginator = Paginator(qs, 5)
+        #     listagem = paginator.get_page(self.request.GET.get('page'))
+        #     return listagem
         else:
             messages.info(self.request, 'Não existem voluntários cadastrados')
             return qs

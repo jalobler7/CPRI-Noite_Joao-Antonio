@@ -13,13 +13,10 @@ class Abrigo(models.Model):
 
 
 
-
-
-
-
     class Meta:
         verbose_name = 'Abrigo'
         verbose_name_plural = 'Abrigos'
+        permissions = (('Visualizar_Doacoes', 'Permite visualizar as doacoes'),)
 
     def __str__(self):
         return self.nome

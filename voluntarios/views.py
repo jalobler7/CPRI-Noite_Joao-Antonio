@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.mail import send_mail
 
@@ -15,9 +16,11 @@ from .forms import VoluntarioModelForm
 from .models import Voluntario
 
 
-class VoluntarioExibir(DetailView):
+class VoluntarioExibir(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Voluntario
     template_name = 'voluntario_exibir.html'
+    permission_required = 'voluntarios.view_voluntario'
+    permission_denied_message = 'Listar Voluntarios'
 
 
     def get_object(self, queryset=None):
@@ -52,10 +55,13 @@ class VoluntarioExibir(DetailView):
 
 
 
-class VoluntariosView(ListView):
+class VoluntariosView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    permission_required = 'voluntarios.view_voluntario'
+    permission_denied_message = 'Listar Voluntarios'
     model = Voluntario
     template_name = 'voluntarios.html'
     paginate_by = 5
+
 
 
     def get_queryset(self):
@@ -64,12 +70,7 @@ class VoluntariosView(ListView):
 
         if buscar:
             return qs.filter(Q(nome__icontains=buscar) | Q(cpf__icontains=buscar))
-           # return qs.filter(nome__icontains=buscar)
 
-        # if qs.count() > 0:
-        #     paginator = Paginator(qs, 5)
-        #     listagem = paginator.get_page(self.request.GET.get('page'))
-        #     return listagem
         else:
             messages.info(self.request, 'Não existem voluntários cadastrados')
             return qs
@@ -77,27 +78,34 @@ class VoluntariosView(ListView):
 
 
 
-class VoluntarioAddView(SuccessMessageMixin, CreateView):
+class VoluntarioAddView(LoginRequiredMixin, PermissionRequiredMixin, SuccessMessageMixin, CreateView):
     model = Voluntario
     form_class = VoluntarioModelForm
     template_name = 'voluntario_form.html'
     success_url = reverse_lazy('voluntarios')
     success_message = 'Voluntário cadastrado com sucesso'
+    permission_required = 'voluntarios.add_voluntario'
+    permission_denied_message = 'Adcionar Voluntarios'
 
 
 
-class VoluntarioUpdateView(SuccessMessageMixin, UpdateView):
+
+class VoluntarioUpdateView(LoginRequiredMixin,PermissionRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Voluntario
     form_class = VoluntarioModelForm
     template_name = 'voluntario_form.html'
     success_url = reverse_lazy('voluntarios')
     success_message = 'Voluntário atualizado com sucesso'
+    permission_required = 'voluntarios.change_voluntario'
+    permission_denied_message = 'Editar Voluntarios'
 
 
-class VoluntarioDeleteView(SuccessMessageMixin, DeleteView):
+class VoluntarioDeleteView(PermissionRequiredMixin,SuccessMessageMixin, DeleteView):
     model = Voluntario
     template_name = 'voluntario_apagar.html'
     success_url = reverse_lazy('voluntarios')
     success_message = 'Voluntário deletado com sucesso'
+    permission_required = 'voluntarios.delete_voluntario'
+    permission_denied_message = 'Deletar Voluntarios'
 
 

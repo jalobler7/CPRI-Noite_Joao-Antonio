@@ -15,5 +15,6 @@ class Voluntario(models.Model):
         verbose_name = 'Voluntário'
         verbose_name_plural = 'Voluntários'
 
+
     def __str__(self):
         return self.nome

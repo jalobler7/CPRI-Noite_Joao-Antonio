@@ -17,7 +17,7 @@ import os.path
 import dj_database_url
 from django.conf import STATICFILES_STORAGE_ALIAS
 from django.conf.global_settings import EMAIL_BACKEND, EMAIL_HOST, EMAIL_PORT, EMAIL_USE_TLS, EMAIL_HOST_PASSWORD, \
-    STATIC_ROOT
+    STATIC_ROOT, LOGIN_REDIRECT_URL
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -164,6 +164,7 @@ EMAIL_USE_TLS = config("EMAIL_USE_TLS")
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
-LOGIN_REDIRECT_URL = 'index'
+# LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'login'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'

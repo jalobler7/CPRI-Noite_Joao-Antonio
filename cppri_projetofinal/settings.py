@@ -166,5 +166,6 @@ EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
 # LOGIN_REDIRECT_URL = 'index'
 #LOGIN_REDIRECT_URL = 'principal'
-LOGIN_URL = 'inicial'
+LOGIN_REDIRECT_URL = 'menu-central'
+LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'

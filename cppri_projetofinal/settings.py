@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
+
+import dj_database_url
+from django.conf.global_settings import EMAIL_BACKEND, EMAIL_HOST, EMAIL_PORT, EMAIL_USE_TLS, EMAIL_HOST_PASSWORD
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,13 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-adj^oqf7!ip9-rataw11bad(+9dx5s&jp&a1&zav^#r=vdmjx-'
-
+# SECRET_KEY = 'django-insecure-adj^oqf7!ip9-rataw11bad(+9dx5s&jp&a1&zav^#r=vdmjx-'
+SECRET_KEY=config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+# DEBUG = True
+DEBUG=config("DEBUG", cast=bool)
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS=config("ALLOWED_HOSTS").split(",")
 
 # Application definition
 
@@ -77,11 +81,19 @@ WSGI_APPLICATION = 'cppri_projetofinal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+# DATABASES ={
+#     'default': dj_database_url.parse("postgresql://projetofinal_w801_user:0a9Ba8BOKDG64LWgFMwS1lA1gk5ORD5a@dpg-ct8dc41opnds739ubbb0-a.oregon-postgres.render.com/projetofinal_w801"),
+# }
+
+DATABASES={
+    'default': dj_database_url.parse(config("DATABASE_URL")),
 }
 
 
@@ -129,13 +141,20 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'jalobler0107@gmail.com'
-EMAIL_HOST_PASSWORD= 'snzzbqqperuxnfkq'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'jalobler0107@gmail.com'
+# EMAIL_HOST_PASSWORD= 'snzzbqqperuxnfkq'
 DEFAULT_FROM_EMAIL = 'ControleAbrigos'
+
+EMAIL_BACKEND = config("EMAIL_BACKEND")
+EMAIL_HOST = config("EMAIL_HOST")
+EMAIL_PORT = config("EMAIL_PORT")
+EMAIL_USE_TLS = config("EMAIL_USE_TLS")
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
 LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'

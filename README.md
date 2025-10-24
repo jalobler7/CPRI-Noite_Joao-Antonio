@@ -19,14 +19,14 @@ O site busca oferecer uma **plataforma simples e funcional** para auxiliar na **
 
 ---
 
-## ⚙️ Funcionalidades Principais
+##  Funcionalidades Principais
 
 - **Autenticação de Usuários**  
   - Login para voluntários e gestores de abrigo.  
   - Perfis distintos com permissões específicas.  
 
 - **Cadastro de Abrigos**  
-  - Inclusão de novos abrigos com informações básicas (nome, endereço, responsável, capacidade).  
+  - Inclusão de novos abrigos com informações básicas (nome, endereço, capacidade).  
   - Registro das necessidades e demandas do abrigo.  
 
 - **Gerenciamento de Doações**  
